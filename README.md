@@ -2,6 +2,8 @@
 
 Trying Vagrant
 
+Read blog post at: [https://thedreambook.github.io/blog/hello-vagrant/](https://thedreambook.github.io/blog/hello-vagrant/)
+
 ## Setup
 
 Setup Lab
