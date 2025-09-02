@@ -8,6 +8,8 @@ Vagrant.configure("2") do |config|
   # Install Docker and dependencies
   config.vm.provision "shell", name: "install-dependencies", path: "scripts/install-dependencies.sh"
 
+
+
   # # Start Terramino (can be rerun with vagrant provision --provision-with start-terramino)
   # config.vm.provision "shell", name: "start-terramino", inline: <<-SHELL
   #   cd /home/vagrant/terramino-go
@@ -33,6 +35,8 @@ Vagrant.configure("2") do |config|
   # config.vm.network "forwarded_port", guest: 8080, host: 9080
   # config.vm.network "forwarded_port", guest: 8081, host: 9081
 
+
+
   # -----
   # https://developer.hashicorp.com/vagrant/tutorials/get-started/network-folder-sync#enable-folder-synchronization
   # -----
@@ -40,7 +44,9 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./shared-with-vm", "/home/vagrant/shared-with-vm", create: true
 
 
+
   # Nginx Server
+  # Visit http://192.168.56.12:9082/
   config.vm.define "nginx" do |nginx|
     nginx.vm.hostname = "nginx"
     nginx.vm.network "private_network", ip: '192.168.56.12'
@@ -56,6 +62,7 @@ Vagrant.configure("2") do |config|
   end
   
   # Apache Server
+  # Visit http://192.168.56.13:9083/
   config.vm.define "apache" do |apache|
     apache.vm.hostname = "apache"
     apache.vm.network "private_network", ip: '192.168.56.13'
