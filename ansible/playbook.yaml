@@ -1,0 +1,19 @@
+- name: My first play
+  hosts: all
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:
+
+   - name: Print message
+     ansible.builtin.debug:
+      msg: Hello world
+
+   - name: List all Docker containers (including stopped)
+     ansible.builtin.command:
+      cmd: docker ps -a
+     register: docker_ps_output
+     changed_when: false
+
+   - name: Show all Docker containers in terminal
+     ansible.builtin.debug:
+      msg: "{{ docker_ps_output.stdout }}"

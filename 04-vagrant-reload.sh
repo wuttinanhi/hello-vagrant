@@ -1,4 +1,4 @@
 #!/bin/sh
 
-# reload after config modified.
+# restart the VM and runs provisioning
 vagrant reload --provision

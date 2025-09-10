@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "hashicorp-education/ubuntu-24-04"
-  config.vm.box_version = "0.1.0"
-
+  config.vm.box = "debian/bookworm64"
+  config.vm.box_version = "12.20250126.1"
+  
   # -----
   # https://developer.hashicorp.com/vagrant/tutorials/get-started/provision
   # -----
@@ -56,19 +56,19 @@ Vagrant.configure("2") do |config|
   # Start Terramino (can be rerun with vagrant provision --provision-with start-terramino)
   # Visit http://192.168.56.10:8080/
   # Visit http://192.168.56.10:8081/
-  config.vm.define "terramino" do |terramino|
-    terramino.vm.hostname = "terramino"
-    terramino.vm.network "private_network", ip: '192.168.56.10'
-    terramino.vm.network "forwarded_port", guest: 8080, host: 8080
-    terramino.vm.network "forwarded_port", guest: 8081, host: 8081
-    terramino.vm.network "forwarded_port", guest: 6379, host: 6379
+  # config.vm.define "terramino" do |terramino|
+  #   terramino.vm.hostname = "terramino"
+  #   terramino.vm.network "private_network", ip: '192.168.56.10'
+  #   terramino.vm.network "forwarded_port", guest: 8080, host: 8080
+  #   terramino.vm.network "forwarded_port", guest: 8081, host: 8081
+  #   terramino.vm.network "forwarded_port", guest: 6379, host: 6379
 
-    terramino.vm.provision "shell", name: "start-terramino", inline: <<-SHELL
-      docker run -d -p 6379:6379 --name redis --restart always redis:alpine
-      docker run -d -p 8081:8081 --name frontend --restart always ghcr.io/hashicorp-education/terramino-go/terramino-go-frontend:1.0
-      docker run -d -p 8080:8080 --name backend --restart always -e REDIS_HOST=redis -e REDIS_PORT=6379 -e TERRAMINO_PORT=8080 ghcr.io/hashicorp-education/terramino-go/terramino-go-backend:1.0
-    SHELL
-  end
+  #   terramino.vm.provision "shell", name: "start-terramino", inline: <<-SHELL
+  #     docker run -d -p 6379:6379 --name redis --restart always redis:alpine
+  #     docker run -d -p 8081:8081 --name frontend --restart always ghcr.io/hashicorp-education/terramino-go/terramino-go-frontend:1.0
+  #     docker run -d -p 8080:8080 --name backend --restart always -e REDIS_HOST=redis -e REDIS_PORT=6379 -e TERRAMINO_PORT=8080 ghcr.io/hashicorp-education/terramino-go/terramino-go-backend:1.0
+  #   SHELL
+  # end
 
   
   # Nginx Server
